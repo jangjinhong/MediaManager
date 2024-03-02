@@ -23,12 +23,12 @@ public class MemberRepositoryTest {
                     // member(1차캐시 저장) == findMember(1차캐시에서 조회) -> select sql Xx
     public void save() throws Exception {
         Member member = new Member();
-        member.setUsername("memberA");
+        member.setName("memberA");
         Long memberId = memberRepository.save(member);
         Member findMember = memberRepository.find(memberId);
 
         assertThat(findMember.getId()).isEqualTo(member.getId());
-        assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
+        assertThat(findMember.getName()).isEqualTo(member.getName());
         assertThat(findMember).isEqualTo(member);
 
         System.out.println(findMember);
