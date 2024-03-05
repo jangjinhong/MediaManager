@@ -3,19 +3,33 @@ package com.prog.mediamanager.repository;
 import com.prog.mediamanager.entity.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class MemberRepository {
-    @PersistenceContext
-    private EntityManager em;
+import java.util.List;
 
-    public Long save(Member member) {
+@Repository
+@RequiredArgsConstructor
+public class MemberRepository {
+
+    private final EntityManager em;
+
+    public void save(Member member) {
         em.persist(member);
-        return member.getId();
     }
 
-    public Member find(Long id) {
+    public Member findOne(Long id) {
         return em.find(Member.class, id);
+    }
+
+    public List<Member> findAll() {
+        return em.createQuery("select m from Member m", Member.class)
+                .getResultList();
+    }
+
+    public List<Member> findByName(String name) {
+        return em.createQuery("select m from Member m where name = :name", Member.class)
+                .setParameter("name", name)
+                .getResultList();
     }
 }

@@ -11,12 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
-@RequiredArgsConstructor // 생성자 생성(final 키워드 있는 field만 !!!)
+@Transactional(readOnly = true)
+@RequiredArgsConstructor // 생성자 생성(final 키워드 field만 !!!)
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     public Long join(Member member) {
         validateDuplicateMember(member);
         memberRepository.save(member);
@@ -33,12 +34,10 @@ public class MemberService {
         if(!findMembers.isEmpty()) throw new IllegalStateException("이미 존재하는 회원입니다.");
     }
 
-    @Transactional(readOnly = true)
-    public List<Member> findMembers() {
+    public List<Member> findOne() {
         return memberRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public Member findMember(Long id) {
         return memberRepository.findOne(id);
     }
