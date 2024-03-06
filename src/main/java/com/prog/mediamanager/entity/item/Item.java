@@ -4,6 +4,7 @@ import com.prog.mediamanager.entity.Category;
 import com.prog.mediamanager.exception.NotEnoughStockException;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import static jakarta.persistence.InheritanceType.*;
 @Entity
 @Inheritance(strategy = SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
-@Getter
+@Getter @Setter
 public abstract class Item {
 
     @Id @GeneratedValue
