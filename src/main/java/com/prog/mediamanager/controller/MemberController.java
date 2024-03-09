@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -25,7 +27,7 @@ public class MemberController {
 
     @PostMapping("/members/new")
     public String create(@Valid MemberForm form, BindingResult bindingResult) {  //notEmpty.. validation, BindingResult로 에러처리를 매끄럽게
-        if(bindingResult.hasErrors())
+        if (bindingResult.hasErrors())
 //            return "redirect:/members/new"; //새로운 마음으로.
             return "members/createMemberForm"; //다시 끄집어놓기의 차이..
         Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
@@ -35,5 +37,13 @@ public class MemberController {
 
         memberService.join(member);
         return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        //dto로 변환하며 출력하기(추후 수정)
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
     }
 }
