@@ -13,11 +13,11 @@ public class ItemRepository {
 
     private final EntityManager em;
 
-    // insert & update
     public void save(Item item) {
         if(item.getId() == null) // register a new item
             em.persist(item);
-        else em.merge(item); // item 수정 (추후 수정^^)
+        else
+            em.merge(item); // item 수정 (추후 수정^^)
     }
 
     public Item findOne(Long id) {
