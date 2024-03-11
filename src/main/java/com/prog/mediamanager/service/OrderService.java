@@ -8,10 +8,13 @@ import com.prog.mediamanager.entity.item.Item;
 import com.prog.mediamanager.repository.ItemRepository;
 import com.prog.mediamanager.repository.MemberRepository;
 import com.prog.mediamanager.repository.OrderRepository;
+import com.prog.mediamanager.repository.OrderSearch;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -50,5 +53,8 @@ public class OrderService {
     }
 
     // 주문 검색
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByCriteria(orderSearch);
+    }
 
 }

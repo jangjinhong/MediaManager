@@ -2,9 +2,7 @@ package com.prog.mediamanager.service;
 
 import com.prog.mediamanager.entity.Member;
 import com.prog.mediamanager.repository.MemberRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,11 +32,11 @@ public class MemberService {
         if(!findMembers.isEmpty()) throw new IllegalStateException("이미 존재하는 회원입니다.");
     }
 
-    public List<Member> findOne() {
+    public List<Member> findMembers() {
         return memberRepository.findAll();
     }
 
-    public Member findMember(Long id) {
+    public Member findOne(Long id) {
         return memberRepository.findOne(id);
     }
 }

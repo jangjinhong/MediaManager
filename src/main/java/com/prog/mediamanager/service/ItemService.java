@@ -20,6 +20,14 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    @Transactional
+    public void udpateItem(Long itemId, String name, int price, int stockQuantity) {        // dirty checking ex
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+    }
+
     public Item findOne(Long id) {
         return itemRepository.findOne(id);
     }

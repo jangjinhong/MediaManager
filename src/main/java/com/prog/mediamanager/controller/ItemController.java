@@ -69,18 +69,19 @@ public class ItemController {
     }
 
     @PostMapping("/items/{id}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm form) {      // view단에서 수정한 내용이 담긴 객체 form
+    public String updateItem(@PathVariable("id") Long itemId, @ModelAttribute("form") BookForm form) {      // view 단에서 수정한 내용이 담긴 객체 form
         Book book = new Book(); 
 
-        book.setId(form.getId()); // 객체는 새로운 객체지만, id가 세팅되어있음 -> JPA에게 들어갔다 나온 객체!
-        book.setName(form.getName());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setPrice(form.getPrice());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+//        book.setId(form.getId()); // 객체는 새로운 객체지만, id가 세팅되어있음 -> JPA에게 들어갔다 나온 객체!
+//        book.setName(form.getName());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setPrice(form.getPrice());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+//        //book은 준영속 엔티티
+//        itemService.saveItem(book);
 
-        //book은 준영속 엔티티
-        itemService.saveItem(book);
+        itemService.udpateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
 
         return "redirect:/items";
     }
