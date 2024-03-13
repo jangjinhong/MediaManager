@@ -1,5 +1,6 @@
 package com.prog.mediamanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class Order {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id") //FK
+    @JsonIgnore
     private Member member;
 
     @OneToMany(mappedBy = "order", cascade = ALL)
@@ -35,6 +37,7 @@ public class Order {
 
     @OneToOne(fetch = LAZY, cascade = ALL)
     @JoinColumn(name = "delivery_id")
+    @JsonIgnore
     private Delivery delivery;
 
     private LocalDateTime orderDate;
