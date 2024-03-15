@@ -65,4 +65,18 @@ public class OrderRepository {
 
         return query.getResultList();
     }
+
+    public List<Order> findAllWithMemberDelivery() {
+        /** 3개의 테이블을 한 번의 쿼리로 조회하기
+         * 각 필드에 적용시킨 LAZY를 무시하고 실제 객체에 값을 채워서 가져온다 => 페치 조인
+         * 1. 기본적으로 다 LAZY 적용시키기
+         * 2. 필요한 것들만 객체 그래프를 묶어 갖고오기
+         * 위 두가지를 적용시키면 대부분의 성능 문제를 해결할 수 있다!
+         */
+        return em.createQuery("select o from Order o " +
+                        "join fetch o.member m " +
+                        "join fetch o.delivery d", Order.class)
+                .getResultList();
+    }
+
 }
