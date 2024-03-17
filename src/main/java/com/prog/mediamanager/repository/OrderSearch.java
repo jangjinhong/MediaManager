@@ -9,6 +9,4 @@ public class OrderSearch {
     // 검색 기준
     private String memberName;
     private OrderStatus orderStatus;
-
-
 }

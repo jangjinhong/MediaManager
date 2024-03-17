@@ -7,7 +7,6 @@ import com.prog.mediamanager.repository.OrderRepository;
 import com.prog.mediamanager.repository.OrderSearch;
 import com.prog.mediamanager.repository.order.simplequery.OrderSimpleQueryDto;
 import com.prog.mediamanager.repository.order.simplequery.OrderSimpleQueryRepository;
-import com.prog.mediamanager.service.MemberService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,6 @@ import java.util.stream.Collectors;
 public class OrderSimpleApiController {
 
     private final OrderRepository orderRepository;
-    private final MemberService memberService;
     private final OrderSimpleQueryRepository orderSimpleQueryRepository;
 
     @GetMapping("/api/v1/simple-orders")
