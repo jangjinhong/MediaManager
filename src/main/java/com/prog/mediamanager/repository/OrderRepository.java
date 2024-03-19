@@ -79,4 +79,18 @@ public class OrderRepository {
                 .getResultList();
     }
 
+    public List<Order> findAllWithItem() {
+        return em.createQuery("select o from Order o " +
+                        "join fetch o.member m " +
+                        "join fetch o.delivery d " +
+                        "join fetch o.orderItems oi " + // 일대다. 여기부터 기존과 다름
+                        "join fetch oi.item i", Order.class)
+                .setFirstResult(1) //페이징 0부터 시작임.
+                .setMaxResults(100)
+                .getResultList();
+        /** !
+         * order 2건, orderItem은 총 4개
+         * 근데 다 join 해버리면
+         * order가 4개가 되어버림 */
+    }
 }
